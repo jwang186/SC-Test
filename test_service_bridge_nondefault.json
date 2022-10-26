@@ -1,0 +1,35 @@
+{
+    "cluster": "test-sc-dualstack",
+    "desiredCount": 1,
+    "enableECSManagedTags": true,
+    "enableExecuteCommand": true,
+    "launchType": "EC2",
+    "schedulingStrategy": "REPLICA",
+    "serviceName": "go-service-bridge-nondefault", 
+    "serviceConnectConfiguration": {
+        "enabled": true,
+        "namespace": "test-sc-dualstack",
+        "services": [
+            {
+                "portName": "webserver",
+                "discoveryName": "go-bridge-nondefault",
+                "ingressPortOverride": 15000, 
+                "clientAliases": [
+                    {
+                        "port": 8080,
+                        "dnsName": "go.bridge.nondefault"
+                    }
+                ]
+            }
+        ],
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "/ecs/ecs-sc-bugbash",
+                "awslogs-region": "us-west-2",
+                "awslogs-stream-prefix": "ecs"
+            }
+        }
+    },
+    "taskDefinition": "yinyi-server-bridge"
+}

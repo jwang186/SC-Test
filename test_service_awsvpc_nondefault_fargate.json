@@ -1,0 +1,45 @@
+{
+    "cluster": "test-sc-dualstack",
+    "desiredCount": 1,
+    "enableECSManagedTags": true,
+    "enableExecuteCommand": true,
+    "launchType": "FARGATE",
+    "networkConfiguration": {
+        "awsvpcConfiguration": {
+            "securityGroups": [
+                "sg-09ca18e5159506fc3"
+            ],
+            "subnets": [
+                "subnet-08bda296063b22614"
+            ]
+        }
+    },
+    "schedulingStrategy": "REPLICA",
+    "serviceName": "go-service-awsvpc-nondefault-fargate",
+    "serviceConnectConfiguration": {
+        "enabled": true,
+        "namespace": "test-sc-dualstack",
+        "services": [
+            {
+                "portName": "webserver",
+                "discoveryName": "go-awsvpc-nondefault-fargate",
+                "ingressPortOverride": 15000, 
+                "clientAliases": [
+                    {
+                        "port": 8080,
+                        "dnsName": "go.awsvpc.nondefault.fargate"
+                    }
+                ]
+            }
+        ],
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "/ecs/ecs-sc-bugbash",
+                "awslogs-region": "us-west-2",
+                "awslogs-stream-prefix": "ecs"
+            }
+        }
+    },
+    "taskDefinition": "jinwang-server-awsvpc"
+}

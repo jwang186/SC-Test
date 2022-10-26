@@ -1,0 +1,32 @@
+{
+    "family": "ecs-sc-td-bridge",
+    "taskRoleArn": "arn:aws:iam::401418392244:role/ECSSCTaskRole",
+    "executionRoleArn": "arn:aws:iam::401418392244:role/ECSSCTaskRole",
+    "networkMode": "bridge",
+    "containerDefinitions": [
+        {
+        "name": "bugbash-bridge-webserver-jinwang",
+        "image": "401418392244.dkr.ecr.us-west-2.amazonaws.com/bugbash-awsvpc:latest",
+        "cpu": 100,
+        "portMappings": [
+            {
+                "name": "webserver",
+                "containerPort": 8080,
+                "protocol": "tcp", 
+                "appProtocol": "http"
+            }
+        ],
+        "essential": true,
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "/ecs/ecs-sc-demo",
+                "awslogs-region": "us-west-2", 
+                "awslogs-stream-prefix": "ecs"
+            }
+        }
+        }
+        ],
+        "cpu": "256",
+        "memory": "1024"
+    }

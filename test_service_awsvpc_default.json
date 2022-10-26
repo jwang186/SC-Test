@@ -1,0 +1,44 @@
+{
+    "cluster": "test-sc-dualstack",
+    "desiredCount": 1,
+    "enableECSManagedTags": true,
+    "enableExecuteCommand": true,
+    "launchType": "EC2",
+    "networkConfiguration": {
+        "awsvpcConfiguration": {
+            "securityGroups": [
+                "sg-09ca18e5159506fc3"
+            ],
+            "subnets": [
+                "subnet-08bda296063b22614"
+            ]
+        }
+    },
+    "schedulingStrategy": "REPLICA",
+    "serviceName": "go-service-awsvpc-default", 
+    "serviceConnectConfiguration": {
+        "enabled": true,
+        "namespace": "test-sc-dualstack",
+        "services": [
+            {
+                "portName": "webserver",
+                "discoveryName": "go-awsvpc-default",
+                "clientAliases": [
+                    {
+                        "port": 8080,
+                        "dnsName": "go.awsvpc.default"
+                    }
+                ]
+            }
+        ],
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "/ecs/ecs-sc-bugbash",
+                "awslogs-region": "us-west-2",
+                "awslogs-stream-prefix": "ecs"
+            }
+        }
+    },
+    "taskDefinition": "yinyi-server-awsvpc:2"
+}

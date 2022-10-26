@@ -1,0 +1,6 @@
+#!/bin/bash
+            
+echo ECS_LOGLEVEL=debug >> /etc/ecs/ecs.config
+echo ECS_CLUSTER=test-sc-dualstack >> /etc/ecs/ecs.config
+echo AWS_DEFAULT_REGION=us-west-2 >> /etc/ecs/ecs.config
+echo ECS_BACKEND_HOST=https://madison.us-west-2.amazonaws.com >> /etc/ecs/ecs.config

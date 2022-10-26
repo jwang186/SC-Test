@@ -1,0 +1,6 @@
+{
+    "clusterName": "test-sc-dualstack",
+    "serviceConnectDefaults": {
+        "namespace": "test-sc-dualstack"
+    }
+}

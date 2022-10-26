@@ -1,0 +1,33 @@
+{
+    "family": "jinwang-server-awsvpc",
+    "taskRoleArn": "arn:aws:iam::401418392244:role/ECSSCTaskRole",
+    "executionRoleArn": "arn:aws:iam::401418392244:role/ECSSCTaskRole",
+    "networkMode": "awsvpc",
+    "containerDefinitions": [
+        {
+        "name": "v6-server-jinwang",
+        "image": "401418392244.dkr.ecr.us-west-2.amazonaws.com/yinyi-server",
+        "cpu": 100,
+        "portMappings": [
+            {
+                "name": "webserver",
+                "containerPort": 8080,
+                "hostPort": 8080,
+                "protocol": "tcp", 
+                "appProtocol": "http"
+            }
+        ],
+        "essential": true,
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "/ecs/ecs-sc-demo",
+                "awslogs-region": "us-west-2", 
+                "awslogs-stream-prefix": "ecs"
+            }
+        }
+        }
+    ],
+    "cpu": "256",
+    "memory": "1024"
+}
